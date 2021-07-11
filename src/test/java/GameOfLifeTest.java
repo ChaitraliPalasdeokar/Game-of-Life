@@ -21,4 +21,21 @@ public class GameOfLifeTest {
     }
 
 
+    @Test()
+    void shouldReturnNextGenerationForBoatPattern() {
+        List<Cell> initialGeneration = new ArrayList<>();
+        initialGeneration.add(new Cell(0, 1));
+        initialGeneration.add(new Cell(1, 0));
+        initialGeneration.add(new Cell(2, 1));
+        initialGeneration.add(new Cell(0, 2));
+        initialGeneration.add(new Cell(1, 2));
+        List<Cell> expectedNextGeneration = new ArrayList<>(initialGeneration);
+        GameOfLife gameOfLife = new GameOfLife(initialGeneration);
+
+        List<Cell> actualNextGeneration = gameOfLife.getNextGeneration();
+
+        Assertions.assertEquals(expectedNextGeneration, actualNextGeneration);
+    }
+
+
 }
