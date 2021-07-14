@@ -54,4 +54,28 @@ public class GameOfLifeTest {
         Assertions.assertEquals(expectedNextGeneration, actualNextGeneration);
     }
 
+    @Test()
+    void shouldReturnNextGenerationForToadPattern() {
+        List<Cell> initialGeneration = new ArrayList<>();
+        initialGeneration.add(new Cell(1, 1));
+        initialGeneration.add(new Cell(1, 2));
+        initialGeneration.add(new Cell(1, 3));
+        initialGeneration.add(new Cell(2, 2));
+        initialGeneration.add(new Cell(2, 3));
+        initialGeneration.add(new Cell(2, 4));
+        List<Cell> expectedNextGeneration = new ArrayList<>();
+        expectedNextGeneration.add(new Cell(0,2));
+        expectedNextGeneration.add(new Cell(1,1));
+        expectedNextGeneration.add(new Cell(1,4));
+        expectedNextGeneration.add(new Cell(2,1));
+        expectedNextGeneration.add(new Cell(2,4));
+        expectedNextGeneration.add(new Cell(3,3));
+        GameOfLife gameOfLife = new GameOfLife(initialGeneration);
+
+        List<Cell> actualNextGeneration = gameOfLife.getNextGeneration();
+
+        Assertions.assertTrue(actualNextGeneration.containsAll(expectedNextGeneration));
+    }
+
+
 }
