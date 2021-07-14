@@ -37,5 +37,21 @@ public class GameOfLifeTest {
         Assertions.assertEquals(expectedNextGeneration, actualNextGeneration);
     }
 
+    @Test()
+    void shouldReturnNextGenerationForBlinkerPattern() {
+        List<Cell> initialGeneration = new ArrayList<>();
+        initialGeneration.add(new Cell(1, 1));
+        initialGeneration.add(new Cell(1, 0));
+        initialGeneration.add(new Cell(1, 2));
+        List<Cell> expectedNextGeneration = new ArrayList<>();
+        expectedNextGeneration.add(new Cell(1,1));
+        expectedNextGeneration.add(new Cell(0,1));
+        expectedNextGeneration.add(new Cell(2,1));
+        GameOfLife gameOfLife = new GameOfLife(initialGeneration);
+
+        List<Cell> actualNextGeneration = gameOfLife.getNextGeneration();
+
+        Assertions.assertEquals(expectedNextGeneration, actualNextGeneration);
+    }
 
 }

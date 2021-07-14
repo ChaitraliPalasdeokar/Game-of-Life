@@ -13,14 +13,34 @@ public class GameOfLife {
     public List<Cell> getNextGeneration() {
         List<Cell> nextGeneration = new ArrayList<>();
 
+        addLiveCellsToNextGeneration(nextGeneration);
+        addDeadCellThatComesToLife(nextGeneration);
+        return nextGeneration;
+    }
+
+    private void addDeadCellThatComesToLife(List<Cell> nextGeneration) {
+
+        for (Cell cell : initialGeneration) {
+            List<Cell> allNeighbours = cell.getAllNeighbours();
+            for (Cell neighbourcell : allNeighbours) {
+                List<Cell> aliveNeigbours = neighbourcell.getAllAliveNeighbours(initialGeneration);
+                if (aliveNeigbours.size() == MAX_NEIGHBOURS_TO_STAY_ALIVE && !nextGeneration.contains(neighbourcell)) {
+                    nextGeneration.add(neighbourcell);
+                }
+            }
+        }
+    }
+
+    private void addLiveCellsToNextGeneration(List<Cell> nextGeneration) {
+
         for (Cell cell : initialGeneration) {
             List<Cell> aliveNeighbours = cell.getAllAliveNeighbours(initialGeneration);
             if (aliveNeighbours.size() >= MIN_NEIGHBOURS_TO_STAY_ALIVE && aliveNeighbours.size() <= MAX_NEIGHBOURS_TO_STAY_ALIVE) {
                 nextGeneration.add(cell);
+                System.out.println(cell);
             }
 
         }
-        return nextGeneration;
     }
 
 }
